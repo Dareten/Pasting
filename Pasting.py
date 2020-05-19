@@ -1,13 +1,18 @@
-from keyboard import write, add_hotkey, wait
+import keyboard
+import win32clipboard
 from time import sleep
-from pyperclip import paste
 
 def foo():
-    clip = paste()
-    clip = clip.split('\n')
-    for i in clip:
-        write(i)
-        sleep(0.1)
+    sleep(1)
+    win32clipboard.OpenClipboard()
+    data = win32clipboard.GetClipboardData().replace('\n', '').replace('\t', '')
+    win32clipboard.CloseClipboard()
+    keyboard.write(data, delay=0.01)
+    keyboard.send('ctrl+a')
+    keyboard.send('tab')
+    keyboard.send('shift+tab')
 
-add_hotkey('ctrl+v', foo)
-wait('ctrl+q')
+
+
+keyboard.add_hotkey('ctrl+v', foo)
+keyboard.wait('ctrl+q')
