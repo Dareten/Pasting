@@ -1,13 +1,13 @@
-import keyboard #библиотека для управления клавиатурой, в частности установка хоткеев
-from tkinter import Tk # библиотека, которая здесь получает значение буфера обмена в переменную
+import keyboard
+import time
+import pyperclip
 
 def foo():
-    c = Tk() # инициалиция объекта
-    c.withdraw() # удаление окна библиотеки
-    clip = c.clipboard_get() # получение данных
-    c.update()
-    c.destroy() # обновление и удаление объекта
-    keyboard.write(clip) # печать переменной
+    clip = pyperclip.paste()
+    clip = clip.split('\n')
+    for i in clip:
+        keyboard.write(i)
+        time.sleep(0.1)
 
-keyboard.add_hotkey('ctrl+v', foo) # добавление хоткея
-keyboard.wait('ctrl+q') # добавление хоткея на завершение прогаммы
+keyboard.add_hotkey('ctrl+v', foo)
+keyboard.wait('ctrl+q')
