@@ -1,13 +1,13 @@
-import keyboard
-import time
-import pyperclip
+from keyboard import write, add_hotkey, wait
+from time import sleep
+from pyperclip import paste
 
 def foo():
-    clip = pyperclip.paste()
+    clip = paste()
     clip = clip.split('\n')
     for i in clip:
-        keyboard.write(i)
-        time.sleep(0.1)
+        write(i)
+        sleep(0.1)
 
-keyboard.add_hotkey('ctrl+v', foo)
-keyboard.wait('ctrl+q')
+add_hotkey('ctrl+v', foo)
+wait('ctrl+q')
